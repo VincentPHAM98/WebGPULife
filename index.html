@@ -188,30 +188,33 @@
         })
       ];
 
-
-      const encoder = device.createCommandEncoder();
-
-      const pass = encoder.beginRenderPass({
-        colorAttachments: [{
-          view: context.getCurrentTexture().createView(),
-          loadOp: "clear",
-          clearValue: [0, 0, 0, 1],
-          storeOp: "store",
-        }]
-      });
-
-      pass.setPipeline(cellPipeline);
-      pass.setVertexBuffer(0, vertexBuffer);
-      pass.setBindGroup(0, bindGroup);
-      pass.draw(vertices.length / 2, GRID_SIZE * GRID_SIZE); // 6 vertices
-
-      pass.end();
-
-      const commandBuffer = encoder.finish();
-
-      device.queue.submit([commandBuffer]);
-
-      device.queue.submit([encoder.finish()]);
+      function updateGrid() {
+        step++; // Increment the step count
+            
+        // Start a render pass 
+        const encoder = device.createCommandEncoder();
+        const pass = encoder.beginRenderPass({
+          colorAttachments: [{
+            view: context.getCurrentTexture().createView(),
+            loadOp: "clear",
+            clearValue: { r: 0, g: 0, b: 0.4, a: 1.0 },
+            storeOp: "store",
+          }]
+        });
+      
+        // Draw the grid.
+        pass.setPipeline(cellPipeline);
+        pass.setBindGroup(0, bindGroups[step % 2]); // Updated!
+        pass.setVertexBuffer(0, vertexBuffer);
+        pass.draw(vertices.length / 2, GRID_SIZE * GRID_SIZE);
+      
+        // End the render pass and submit the command buffer
+        pass.end();
+        device.queue.submit([encoder.finish()]);
+      }
+      
+      // Schedule updateGrid() to run repeatedly
+      setInterval(updateGrid, UPDATE_INTERVAL);
     </script>
   </body>
 </html>

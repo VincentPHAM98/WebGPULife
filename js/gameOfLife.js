@@ -1,5 +1,5 @@
-const GRID_SIZE = document.getElementById("gridInput").value;
-const UPDATE_INTERVAL = document.getElementById("dtInput").value;; // Update every 50ms (20 times/sec)
+const GRID_SIZE = Math.min(document.getElementById("canvasInput").value, document.getElementById("gridInput").value);
+const UPDATE_INTERVAL = document.getElementById("dtInput").value;
 let step = 0; // Track how many simulation steps have been run
 const WORKGROUP_SIZE = 8;
 

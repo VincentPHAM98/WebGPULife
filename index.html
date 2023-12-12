@@ -27,7 +27,7 @@
 
     </div>
 
-    <button onclick="launchConway()">Launch Game of life</button>
+    <button style="display:block" onclick="launchConway()">Launch Game of life</button>
 
     <script>
       function launchConway() {
@@ -50,6 +50,7 @@
         newCanvas.id = 'conwayCanvas';
         newCanvas.width = document.getElementById("canvasInput").value
         newCanvas.height = document.getElementById("canvasInput").value
+        newCanvas.style = "border:1px solid #000";
 
         document.body.appendChild(newCanvas);
   

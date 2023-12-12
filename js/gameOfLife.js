@@ -1,5 +1,6 @@
 const GRID_SIZE = Math.min(document.getElementById("canvasInput").value, document.getElementById("gridInput").value);
 const UPDATE_INTERVAL = document.getElementById("dtInput").value;
+const CELL_RAND_TRESHOLD = document.getElementById("cellRandInput").value;
 let step = 0; // Track how many simulation steps have been run
 const WORKGROUP_SIZE = 8;
 
@@ -85,7 +86,7 @@ const cellStateStorage = [
 // Set each cell to a random state, then copy the JavaScript array 
 // into the storage buffer.
 for (let i = 0; i < cellStateArray.length; ++i) {
-  cellStateArray[i] = Math.random() > 0.6 ? 1 : 0;
+  cellStateArray[i] = Math.random() > CELL_RAND_TRESHOLD ? 1 : 0;
 }
 device.queue.writeBuffer(cellStateStorage[0], 0, cellStateArray);
 

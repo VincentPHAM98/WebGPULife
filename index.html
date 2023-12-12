@@ -25,6 +25,12 @@
        oninput="dtVal.value=dtInput.value">                                                       
       <output name="dtVal" id="dtVal" for="dtInput">50</output>
 
+      <p>Cell initial state randomness : </p>
+      <input type="range" id="cellRandInput" 
+       name="cellRandInput" min="0" max="1" value="0.6" step="0.01"
+       oninput="cellRandVal.value=cellRandInput.value">                                                       
+      <output name="cellRandVal" id="cellRandVal" for="cellRandInput">0.6</output>
+
     </div>
 
     <button style="display:block" onclick="launchConway()">Launch Game of life</button>
